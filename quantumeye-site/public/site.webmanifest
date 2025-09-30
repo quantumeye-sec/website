@@ -1,0 +1,25 @@
+{
+  "name": "QuantumEye Security",
+  "short_name": "QuantumEye",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/website/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#7C3AED"
+}

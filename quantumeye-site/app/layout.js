@@ -10,9 +10,14 @@ export const metadata = {
     url: 'https://quantumeye-sec.github.io/website',
     siteName: 'QuantumEye Security',
     type: 'website',
-    images: ['https://quantumeye-sec.github.io/website/og-image.png'], // absolute URL = safest on GH Pages
+    images: ['https://quantumeye-sec.github.io/website/og-image.png'],
   },
-  robots: { index: true, follow: true },
+  icons: {
+    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/site.webmanifest',
+  robots: { index: true, follow: true }
 };
 
 import './globals.css';
@@ -20,7 +25,7 @@ import './globals.css';
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen text-slate-200 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <body className="min-h-screen text-slate-200 bg-gradient-to-b from-black via-[#0b0b12] to-black">
         {children}
       </body>
     </html>

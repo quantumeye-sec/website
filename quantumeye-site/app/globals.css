@@ -1,5 +1,47 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .cyber-bg{
+    background:
+      radial-gradient(1200px 600px at 12% 22%, rgba(124,58,237,.18), transparent 60%),
+      radial-gradient(900px 520px  at 82% 28%, rgba(139,92,246,.12), transparent 60%),
+      radial-gradient(700px 420px  at 50% 78%, rgba(167,139,250,.14), transparent 65%),
+      #000;
+    filter: contrast(110%) saturate(115%);
+    animation: cyberShift 40s linear infinite;
+    will-change: background-position;
+  }
+  @keyframes cyberShift {
+    0%{background-position:0 0,0 0,0 0}
+    50%{background-position:60px -30px,-40px 30px,40px 60px}
+    100%{background-position:0 0,0 0,0 0}
+  }
+}
+
+
+
+/* Violet glow components */
+@layer components {
+  .chip {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-xl border transition;
+  }
+  .chip-violet {
+    @apply bg-violet-500/10 text-violet-200 border-violet-500/30
+           ring-1 ring-inset ring-violet-400/25
+           shadow-[0_0_14px_rgba(139,92,246,0.35)]
+           hover:bg-violet-500/15 hover:shadow-[0_0_28px_rgba(139,92,246,0.55)];
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-lg px-2.5 py-1 text-xs font-medium border transition;
+  }
+  .badge-violet {
+    @apply bg-violet-500/10 text-violet-200 border-violet-500/30
+           ring-1 ring-inset ring-violet-400/25
+           shadow-[0_0_10px_rgba(139,92,246,0.35)]
+           hover:bg-violet-500/15 hover:shadow-[0_0_20px_rgba(139,92,246,0.5)];
+  }
+}
 
 :root {
   --background: #ffffff;
@@ -25,3 +67,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  .pulse-glow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120%;
+    height: 120%;
+    transform: translate(-50%, -50%);
+    border-radius: 9999px;
+    background: radial-gradient(
+      closest-side,
+      rgba(139, 92, 246, 0.55),
+      rgba(139, 92, 246, 0) 65%
+    );
+    filter: blur(10px);
+    animation: pulseGlow 2.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 0.95; transform: translate(-50%, -50%) scale(1.12); }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-glow { animation: none; opacity: 0.5; }
+  }
+}
+
