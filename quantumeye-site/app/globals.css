@@ -88,5 +88,64 @@
     box-shadow: 0 0 20px rgba(139,92,246,.25) inset, 0 0 12px rgba(139,92,246,.25);
     border: 1px solid rgba(139,92,246,.35);
   }
+
+/* === Brand animated background (VS Code–style, but violet) === */
+:root{
+  --qes-v1: 167,139,250; /* violet-300/400 */
+  --qes-v2: 139,92,246;  /* violet-500   */
+  --qes-v3: 124,58,237;  /* violet-600   */
 }
 
+/* container */
+.brand-animated-bg { isolation: isolate; }
+
+/* blobs */
+.brand-blob{
+  position:absolute;
+  width:60vmax;
+  height:60vmax;
+  border-radius:50%;
+  filter: blur(60px);
+  opacity:.28;
+  mix-blend-mode:screen; /* glow on dark bg */
+}
+
+/* three blobs with slightly different hues and motion */
+.brand-blob.b1{
+  top:-12%; left:-14%;
+  background: radial-gradient(circle at 30% 30%, rgba(var(--qes-v1),.85) 0%, rgba(var(--qes-v3),.05) 60%);
+  animation: qesBlobFloat1 22s ease-in-out infinite alternate;
+}
+
+.brand-blob.b2{
+  top:-20%; right:-16%;
+  background: radial-gradient(circle at 70% 40%, rgba(var(--qes-v3),.8) 0%, rgba(var(--qes-v2),.05) 60%);
+  animation: qesBlobFloat2 26s ease-in-out infinite alternate;
+}
+
+.brand-blob.b3{
+  bottom:-26%; left:8%;
+  background: radial-gradient(circle at 40% 60%, rgba(var(--qes-v2),.8) 0%, rgba(var(--qes-v3),.05) 60%);
+  animation: qesBlobFloat3 28s ease-in-out infinite alternate;
+}
+
+/* motion keyframes */
+@keyframes qesBlobFloat1{
+  from { transform: translate(-8%, -6%) scale(.95) rotate(0deg); }
+  to   { transform: translate(10%, 6%)  scale(1.08) rotate(8deg); }
+}
+@keyframes qesBlobFloat2{
+  from { transform: translate(6%, -4%)  scale(1.05) rotate(-6deg); }
+  to   { transform: translate(-8%, 8%)  scale(.98) rotate(4deg); }
+}
+@keyframes qesBlobFloat3{
+  from { transform: translate(-6%, 6%)  scale(1.1) rotate(4deg); }
+  to   { transform: translate(8%, -4%)  scale(.95) rotate(-4deg); }
+}
+
+/* accessibility: honor reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .brand-blob { animation: none !important; }
+}
+
+}

@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata = {
   // Domain only; Next will prefix /website for relative assets
-  metadataBase: new URL('https://quantumeye-sec.github.io'),
+  metadataBase: new URL('https://quantumeye-sec.github.io/website'),
   title: 'QuantumEye Security',
   description: 'Pentesting & Red Team Consulting',
   openGraph: {
@@ -14,8 +14,12 @@ export const metadata = {
   },
   icons: {
     // RELATIVE paths (no leading slash) so basePath is applied
-    icon: [{ url: 'favicon.ico', type: 'image/x-icon' }],
-    apple: [{ url: 'apple-touch-icon.png', sizes: '180x180' }],
+    icon: [
+      { url: "/favicon.ico" },                          // multi-size .ico
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   manifest: 'site.webmanifest', // relative
 };

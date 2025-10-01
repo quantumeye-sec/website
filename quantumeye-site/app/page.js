@@ -4,12 +4,17 @@ import Ribbon from "../components/Ribbon";
 import ContactForm from "../components/ContactForm";
 import HexGridTop from "../components/HexGridTop";
 import logoSrc from "../public/logo.png";
+import BrandAnimatedBG from "../components/BrandAnimatedBG";
+import AsciiMistBG from "../components/AsciiMistBG";
 
 export default function Page() {
   return (
     <main className="min-h-screen relative">
       {/* optional global BG glow */}
-      <div aria-hidden className="fixed inset-0 -z-20 pointer-events-none cyber-bg" />
+	  {/* <div aria-hidden className="fixed inset-0 -z-20 pointer-events-none cyber-bg" /> */}
+	  {/*<BrandAnimatedBG mode="fixed" className="opacity-90" />*/}
+	  <AsciiMistBG cell={14} speed={0.038} opacity={0.9} />
+
 
       {/* === Sticky Header === */}
       <header className="sticky top-0 z-50 header-elevated bg-black/70 border-b border-white/10">
@@ -326,10 +331,19 @@ export default function Page() {
             <p className="text-slate-300/80 max-w-3xl mb-10">
               Tell us about your environment and objectives. We’ll propose scope, sample test cases, and timeline.
             </p>
-            <ContactForm />
-            <div className="mt-6 text-sm text-slate-400">
-              sales@quantumeye-security.com • +1 (555) 0133
-            </div>
+      <div className="max-w-xl mx-auto w-full">
+        <ContactForm />
+      </div>
+
+      {/* Updated contact text */}
+      <div className="mt-6 text-sm text-slate-400 text-center">
+        <a
+          href="mailto:wcorcoran@quantumeye-security.com"
+          className="hover:text-slate-200"
+        >
+          wcorcoran@quantumeye-security.com
+        </a>
+      </div>
           </Ribbon>
         </div>
       </section>
