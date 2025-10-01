@@ -1,16 +1,11 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig = {
-  // Static export for GitHub Pages
   output: 'export',
+  // GitHub Pages: https://quantumeye-sec.github.io/website
+  basePath: '/website',
+  assetPrefix: '/website/',
   images: { unoptimized: true },
-
-  // GH Pages serves under /website
-  basePath: isProd ? '/website' : '',
-  assetPrefix: isProd ? '/website/' : '',
-
-  // Avoid 404s on static hosts for nested routes
   trailingSlash: true,
 };
 

@@ -2,28 +2,25 @@
 import Image from "next/image";
 import Ribbon from "../components/Ribbon";
 import ContactForm from "../components/ContactForm";
-
-// Static import = basePath-safe on GitHub Pages and preserves intrinsic aspect ratio
+import HexGridTop from "../components/HexGridTop";
 import logoSrc from "../public/logo.png";
 
 export default function Page() {
   return (
-    <main className="min-h-screen">
-      {/* Lightweight animated background (CSS-only; see .cyber-bg in globals.css) */}
-      <div aria-hidden className="fixed inset-0 -z-10 pointer-events-none cyber-bg" />
+    <main className="min-h-screen relative">
+      {/* optional global BG glow */}
+      <div aria-hidden className="fixed inset-0 -z-20 pointer-events-none cyber-bg" />
 
-      {/* Header / Nav */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-black/70 border-b border-white/10">
+      {/* === Sticky Header === */}
+      <header className="sticky top-0 z-50 header-elevated bg-black/70 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-3 md:py-4 flex items-center justify-between gap-4">
-          {/* Brand block */}
-          <div className="flex items-center gap-3 min-w-0">
+          {/* Brand */}
+          <a href="#top" className="flex items-center gap-3 min-w-0">
             <div className="relative inline-block shrink-0">
-              {/* Pulse glow behind logo (utility defined in globals.css) */}
               <span aria-hidden className="pulse-glow" />
               <Image
                 src={logoSrc}
                 alt="QuantumEye Security logo"
-                // Use intrinsic dimensions to satisfy Next; display size via CSS
                 width={logoSrc.width}
                 height={logoSrc.height}
                 priority
@@ -31,19 +28,18 @@ export default function Page() {
                 sizes="(min-width: 768px) 3.5rem, 2.5rem"
               />
             </div>
-
             <div className="leading-none whitespace-nowrap">
-              <div className="text-slate-100 font-semibold tracking-tight">
+              <div className="text-white font-semibold tracking-tight">
                 QuantumEye Security
               </div>
-              <div className="text-[11px] sm:text-xs text-slate-400">
+              <div className="text-[11px] sm:text-xs text-slate-300">
                 Pentesting &amp; Red Team Consulting
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Nav */}
-          <nav className="hidden md:flex items-center gap-6 text-slate-300">
+          <nav className="hidden md:flex items-center gap-6 text-slate-200">
             <a href="#services" className="hover:text-white">Services</a>
             <a href="#method" className="hover:text-white">Method</a>
             <a href="#industries" className="hover:text-white">Industries</a>
@@ -55,18 +51,21 @@ export default function Page() {
           {/* CTA */}
           <a
             href="#contact"
-            className="hidden md:inline-flex bg-violet-400 text-slate-900 font-semibold px-4 py-2 rounded-2xl"
+            className="hidden md:inline-flex btn-glow-violet px-4 py-2 rounded-2xl font-semibold"
           >
             Request a Quote
           </a>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="py-24 md:py-36">
-        <div className="max-w-7xl mx-auto px-6">
-          <Ribbon>
+      {/* ===== Hero (with scrolling hex grid) ===== */}
+      <div id="top" className="relative isolate" style={{ minHeight: "68vh" }}>
+        <HexGridTop mode="scroll" />
+
+        <section className="py-24 md:py-36 relative z-10">
+          <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Headline + copy */}
               <div>
                 <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight">
                   Offensive security,<br />
@@ -74,40 +73,42 @@ export default function Page() {
                     without the drama.
                   </span>
                 </h1>
-                <p className="mt-6 text-lg text-slate-300/90 max-w-xl">
+
+                <p
+                  className="mt-6 text-lg text-slate-200/95 max-w-xl"
+                  style={{ textShadow: "0 1px 6px rgba(0,0,0,.35)" }}
+                >
                   Boutique penetration testing &amp; red-team consulting for startups,
                   scaleups, and regulated enterprises. We blend attacker tradecraft
                   with measurable risk reduction.
                 </p>
+
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href="#contact"
-                    className="bg-violet-400 text-slate-900 px-5 py-3 rounded-2xl font-semibold"
-                  >
+                  <a href="#contact" className="btn-glow-violet px-5 py-3 rounded-2xl font-semibold">
                     Start an Engagement →
                   </a>
                   <a
                     href="#services"
-                    className="border border-violet-500/50 px-5 py-3 rounded-2xl font-semibold text-slate-200"
+                    className="btn-outline-violet px-5 py-3 rounded-2xl font-semibold"
+                    style={{ textShadow: "0 0 10px rgba(0,0,0,.55)" }}
                   >
                     Explore Services
                   </a>
                 </div>
               </div>
 
-              <aside className="bg-slate-900/70 border border-white/10 rounded-3xl p-6">
+              {/* Hero card */}
+              <aside className="bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-xl shadow-black/40">
                 <h2 className="text-slate-100 font-bold text-lg flex items-center gap-2">
                   🛡️ Real Attack Paths Uncovered
                 </h2>
-                <ul className="mt-4 space-y-2 text-slate-300 text-sm">
+                <ul className="mt-4 space-y-2 text-slate-200 text-sm">
                   <li>• Web &amp; API vulns with PoC exploits</li>
                   <li>• Internal lateral movement maps</li>
                   <li>• Cloud misconfig to data-access chains</li>
                   <li>• Rogue AP &amp; WPA2/Enterprise tests</li>
                   <li>• Red/Purple team with measurable detections</li>
                 </ul>
-
-                {/* Violet badges */}
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="badge badge-violet">ISO 27001</span>
                   <span className="badge badge-violet">SOC 2</span>
@@ -117,12 +118,23 @@ export default function Page() {
                 </div>
               </aside>
             </div>
-          </Ribbon>
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
 
-      {/* Services */}
-      <section id="services" className="py-20">
+      {/* ===== Services ===== */}
+      <section id="services" className="relative py-20">
+        {/* Full-width neon separator */}
+        <div className="absolute inset-x-0 top-0 z-20 pointer-events-none">
+          <div
+            className="h-[3px] w-full bg-violet-600"
+            style={{
+              boxShadow:
+                "0 0 14px rgba(167,139,250,.85), 0 0 32px rgba(124,58,237,.55), 0 0 52px rgba(124,58,237,.35)",
+            }}
+          />
+        </div>
+
         <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-100 mb-4">
@@ -130,7 +142,8 @@ export default function Page() {
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-500 to-violet-600">
                 penetration testing
               </span>{" "}
-              for modern stacks
+              for modern{" "}
+              <span className="inline-block pt-[3px] md:pt-[4px]">stacks</span>
             </h2>
             <p className="text-slate-300/80 max-w-3xl mb-10">
               Choose a focused assessment or combine into a program. Every
@@ -138,7 +151,7 @@ export default function Page() {
               prioritized fixes.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-6 text-sm">
+            <div className="grid md:grid-cols-3 gap-6 text-sm text-slate-200">
               <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-4">
                 🌐 Web / API Pentest — OWASP, authz flaws, SSRF/RCE, logic bugs.
               </div>
@@ -171,15 +184,16 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Method */}
+      {/* ===== Method ===== */}
       <section id="method" className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-100 mb-4">
-              A repeatable method that proves risk &amp; accelerates fixes
+              A repeatable method that proves risk &{" "}
+              <span className="inline-block pt-[3px] md:pt-[4px]">accelerates fixes</span>
             </h2>
 
-            <div className="grid md:grid-cols-4 gap-6 text-sm">
+            <div className="grid md:grid-cols-4 gap-6 text-sm text-slate-200">
               <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-4">
                 🔐 Scoping — ROE, guardrails, data-handling, windows.
               </div>
@@ -197,7 +211,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Industries (violet-glow chips) */}
+      {/* ===== Industries ===== */}
       <section id="industries" className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
@@ -223,7 +237,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Proof */}
+      {/* ===== Proof ===== */}
       <section id="proof" className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
@@ -261,7 +275,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ===== FAQ ===== */}
       <section id="faq" className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
@@ -299,9 +313,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Contact */}
+      {/* ===== Contact ===== */}
       <section id="contact" className="py-20">
-        <div className="max-w-7xl mx-auto px-6 items-center">
+        <div className="max-w-7xl mx-auto px-6">
           <Ribbon className="pt-10 pb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-100 mb-4">
               Get a{" "}
@@ -312,18 +326,15 @@ export default function Page() {
             <p className="text-slate-300/80 max-w-3xl mb-10">
               Tell us about your environment and objectives. We’ll propose scope, sample test cases, and timeline.
             </p>
-
-            {/* Client-side form component posts to your endpoint */}
             <ContactForm />
-
             <div className="mt-6 text-sm text-slate-400">
-              wcorcoran@quantumeye-security.com
+              sales@quantumeye-security.com • +1 (555) 0133
             </div>
           </Ribbon>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ===== Footer ===== */}
       <footer className="border-t border-white/5 py-10 text-sm text-slate-300/90">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:justify-between gap-4">
           <div>
